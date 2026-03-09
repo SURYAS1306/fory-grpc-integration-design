@@ -79,6 +79,49 @@ FlatBuffers usually integrate via **custom marshallers**:
 
 This pattern is analogous to how Fory can **wrap a `MemoryBuffer` or `CBuffer`** around bytes and decode without extra copying of internal data structures where possible.
 
+
+
+#### 1.4 gRPC Message Framing
+
+At the transport layer, gRPC frames each message before sending it over HTTP/2.  
+Every message is wrapped in a **5-byte gRPC message header** followed by the serialized payload produced by the codec.
+
+The structure is:
+
+| Field | Size | Description |
+|------|------|-------------|
+| Compression Flag | 1 byte | `0` = uncompressed, `1` = compressed |
+| Message Length | 4 bytes | Big-endian length of the serialized payload |
+| Payload | N bytes | Serialized request/response bytes (Protobuf, FlatBuffers, or Fory) |
+
+Flow example:
+
+```mermaid
+flowchart LR
+  A[Application Object]
+  B[Serialization Codec<br>Protobuf / FlatBuffers / Fory]
+  C[Serialized Payload (bytes)]
+  D[gRPC Framing<br>5-byte header + payload]
+  E[HTTP/2 DATA Frames]
+  F[Network Transport]
+
+  A --> B
+  B --> C
+  C --> D
+  D --> E
+  E --> F
+```
+On the receiving side, the gRPC runtime:
+
+1)Reads HTTP/2 frames.
+
+2)Reassembles the message payload.
+
+3)Removes the 5-byte gRPC header.
+
+4)Passes the payload to the configured marshaller / codec for deserialization.
+  
+
 ---
 
 ### 2. Generated Stubs and gRPC Runtime
