@@ -33,7 +33,7 @@ Covers:
 
 ### 2. gRPC Runtime Architecture (Protobuf & FlatBuffers)
 Location:
-docs/design/grpc-runtime-architecture-protobuf-flatbuffers.md
+[docs/design/grpc-runtime-architecture-protobuf-flatbuffers.md](docs/design/grpc-runtime-architecture-protobuf-flatbuffers.md)
 
 Covers:
 - gRPC runtime lifecycle
