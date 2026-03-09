@@ -18,7 +18,7 @@ We focus on request lifecycle, stub interactions, serialization triggers, memory
 
 #### 1.1 High-level flow
 
-```mermaid
+``` mermaid
 flowchart LR
   A[Client Stub] --> B[Request Serializer]
   B --> C[gRPC Transport]
