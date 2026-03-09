@@ -21,7 +21,7 @@ gRPC --> Network
 
 ### 1. Fory Java & Python gRPC Integration Design
 Location:
-docs/design/fory-java-python-grpc-integration.md
+[docs/design/fory-java-python-grpc-integration.md](docs/design/fory-java-python-grpc-integration.md)
 
 Covers:
 - Compiler pipeline extensions
