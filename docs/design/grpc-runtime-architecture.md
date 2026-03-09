@@ -98,12 +98,12 @@ Flow example:
 
 ```mermaid
 flowchart LR
-  A[Application Object]
-  B[Serialization Codec<br>Protobuf / FlatBuffers / Fory]
-  C[Serialized Payload (bytes)]
-  D[gRPC Framing<br>5-byte header + payload]
-  E[HTTP/2 DATA Frames]
-  F[Network Transport]
+  A["Application Object"]
+  B["Serialization Codec<br>Protobuf / FlatBuffers / Fory"]
+  C["Serialized Payload (bytes)"]
+  D["gRPC Framing<br>5-byte header + payload"]
+  E["HTTP/2 DATA Frames"]
+  F["Network Transport"]
 
   A --> B
   B --> C
